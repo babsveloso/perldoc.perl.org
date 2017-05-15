@@ -1,21 +1,29 @@
-<h1>[% pagename %]</h1>
-<div class="mod_az_list">
-  [% FOREACH az IN module_az %]
-    [% IF az.link %]
-      <a href="[% path %][% az.link %]">[% az.letter %]</a>
-    [% ELSE %]
-      [% az.letter %]
-    [% END %]
-    [% UNLESS loop.last %]
-      |
-    [% END %]
-  [% END %]
+<div class="container-fluid container-internal">
+  <div class="row">
+    <div class="col-sm-4 col-md-3 sidebar">
+      [% INCLUDE default_sidebar.tt %]
+    </ul>
+    </div>
+    <div class="col-sm-8 content">
+      <div class="content-container">
+        <a href="#" class="btn btn-block btn-success btn-sidebar visible-xs js-show-sidebar">« View menu</a>
+        <h2 class="alternate">[% pagename %]</h2>
+          <ul class="list-inline">
+            [% FOREACH az IN module_az %]
+              [% IF az.link %]
+                <li><a href="[% path %][% az.link %]">[% az.letter %]</a></li>
+              [% END %]
+            [% END %]
+          </ul>
+          <ul>
+            [% FOREACH module IN module_links %]
+              <li><a href="[% path %][% module.url %]">[% module.name %]</a>
+              [% IF module.title %]
+                - [% module.title %]
+              [% END %]
+            [% END %]
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
-<ul>
-  [% FOREACH module IN module_links %]
-    <li><a href="[% path %][% module.url %]">[% module.name %]</a>
-    [% IF module.title %]
-      - [% module.title %]
-    [% END %]
-  [% END %]
-</ul>

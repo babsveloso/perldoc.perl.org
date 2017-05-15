@@ -1,22 +1,23 @@
-<script language="JavaScript" type="text/javascript">
-function selectPerlVersion(element) {
-  if (element.value.substring(0,1) == '/') {
-    location.href = element.value;
-  }
-}
-</script>
-
-<select id="perl_version_select" name="version-chooser" onChange="selectPerlVersion(this)">
-  <option selected>Select...
-  <optgroup label="Perl 5 version 12">
-    <option value="/index.html">Perl 5.12.0
-  </optgroup>
-  <optgroup label="Perl 5 version 10">
-    <option value="/5.10.1/index.html">Perl 5.10.1
-    <option value="/5.10.0/index.html">Perl 5.10.0
-  </optgroup>
-  <optgroup label="Perl 5 version 8">
-    <option value="/5.8.9/index.html">Perl 5.8.9
-    <option value="/5.8.8/index.html">Perl 5.8.8
-  </optgroup>
-</select>
+<li><a href="/index.html">Perl 5.24.0</a></li>
+<li><a href="/5.22.0//index.html">Perl 5.22.0</a></li>
+<li><a href="/5.20.2/index.html">Perl 5.20.2</a></li>
+<li><a href="/5.20.1/index.html">Perl 5.20.1</a></li>
+<li><a href="/5.20.0/index.html">Perl 5.20.0</a></li>
+<li><a href="/5.18.2/index.html">Perl 5.18.2</a></li>
+<li><a href="/5.18.1/index.html">Perl 5.18.1</a></li>
+<li><a href="/5.18.0/index.html">Perl 5.18.0</a></li>
+<li><a href="/5.16.2/index.html">Perl 5.16.2</a></li>
+<li><a href="/5.16.1/index.html">Perl 5.16.1</a></li>
+<li><a href="/5.16.0/index.html">Perl 5.16.0</a></li>
+<li><a href="/5.14.2/index.html">Perl 5.14.2</a></li>
+<li><a href="/5.14.1/index.html">Perl 5.14.1</a></li>
+<li><a href="/5.14.0/index.html">Perl 5.14.0</a></li>
+<li><a href="/5.12.4/index.html">Perl 5.12.4</a></li>
+<li><a href="/5.12.3/index.html">Perl 5.12.3</a></li>
+<li><a href="/5.12.2/index.html">Perl 5.12.2</a></li>
+<li><a href="/5.12.1/index.html">Perl 5.12.1</a></li>
+<li><a href="/5.12.0/index.html">Perl 5.12.0</a></li>
+<li><a href="/5.10.1/index.html">Perl 5.10.1</a></li>
+<li><a href="/5.10.0/index.html">Perl 5.10.0</a></li>
+<li><a href="/5.8.9/index.html">Perl 5.8.9</a></li>
+<li><a href="/5.8.8/index.html">Perl 5.8.8</a></li>

@@ -1,0 +1,57 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="[% path %]index.html">
+        <img src="/static/img/logo_perl_doc.svg">
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="search_form">
+          <form action="[% path %]search.html" method="GET" id="search">
+            <input type="text" name="q" id="search_box" alt="Search" class="form-control" placeholder="Search">
+          </form>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Perl<span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-version">
+            <li>[% INCLUDE perlversion.tt %]</li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown">
+            Manuals<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="[% path %]index-overview.html">Overview</a></li>
+            <li><a href="[% path %]index-tutorials.html">Tutorials</a></li>
+            <li><a href="[% path %]index-faq.html">FAQs</a></li>
+            <li><a href="[% path %]index-history.html">History / Changelog</a></li>
+            <li><a href="[% path %]index-licence.html">License</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown">
+            Reference<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="[% path %]index-modules-A.html">Modules</a></li>
+            <li><a href="[% path %]index-language.html">Language</a></li>
+            <li><a href="[% path %]index-functions.html">Functions</a></li>
+            <li><a href="[% path %]perlop.html">Operators</a></li>
+            <li><a href="[% path %]perlvar.html">Special Variables</a></li>
+            <li><a href="[% path %]index-pragmas.html">Pragmas</a></li>
+            <li><a href="[% path %]index-utilities.html">Utilities</a></li>
+            <li><a href="[% path %]index-internals.html">Internals</a></li>
+            <li><a href="[% path %]index-platforms.html">Platform Specific</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

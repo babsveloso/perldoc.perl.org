@@ -35,7 +35,7 @@ my %specifiers = (
   'download'    => '!',
   'pdf'         => '!',
   'perl'        => '=s',
-);                  
+);
 my %options;
 GetOptions( \%options, optionspec(%specifiers) );
 
@@ -71,12 +71,12 @@ if ($options{perl}) {
   my $perl_inc     = `$options{perl} -e '$inc_cmd'`;
   my $bin_cmd      = 'use Config; print $Config{bin}';
   my $perl_bin     = `$options{perl} -e '$bin_cmd'`;
-  
+
   $Perldoc::Config::option{perl_version}  = $perl_version;
   $Perldoc::Config::option{perl5_version} = substr($perl_version,2);
   $Perldoc::Config::option{inc}           = [split /\n/,$perl_inc];
   $Perldoc::Config::option{bin}           = $perl_bin;
-  
+
   #warn Dumper(\%Perldoc::Config::option);
 }
 
@@ -87,7 +87,7 @@ use Perldoc::Function;
 use Perldoc::Function::Category;
 use Perldoc::Page;
 use Perldoc::Page::Convert;
-use Perldoc::Section;  
+use Perldoc::Section;
 EOT
 
 die $@ if $@;
@@ -117,7 +117,7 @@ foreach my $module_index ('A'..'Z') {
   my $link;
   if (grep {/^$module_index/ && exists($Perldoc::Page::CoreList{$_})} Perldoc::Page::list()) {
     $link = "index-modules-$module_index.html";
-  } 
+  }
   push @module_az_links, {letter=>$module_index, link=>$link};
 }
 
@@ -153,7 +153,7 @@ foreach my $section (Perldoc::Section::list()) {
   $index_data{pageaddress} = "index-$section.html";
   $index_data{content_tt}  = 'section_index.tt';
   $index_data{module_az}   = \@module_az_links;
-  
+
   foreach my $page (Perldoc::Section::pages($section)) {
     (my $page_link = $page) =~ s/::/\//g;
     push @{$index_data{section_pages}},{name=>$page, link=>"$page_link.html",title=>Perldoc::Page::title($page)};
@@ -161,9 +161,9 @@ foreach my $section (Perldoc::Section::list()) {
 
   my $htmlfile = catfile($Perldoc::Config::option{output_path},$index_data{pageaddress});
   check_filepath($htmlfile);
-  
+
   $template->process('default.tt',{%Perldoc::Config::option, %index_data},$htmlfile) || die $template->error;
-  
+
   # For every index page, create the corresponding man pages
   foreach my $page (Perldoc::Section::pages($section)) {
     next if ($page eq 'perlfunc');  # 'perlfunc' will be created later
@@ -175,18 +175,17 @@ foreach my $section (Perldoc::Section::list()) {
     $page_data{pageaddress} = "$page_link.html";
     $page_data{contentpage} = 1;
     $page_data{module_az}   = \@module_az_links;
-    $page_data{breadcrumbs} = [ {name=>Perldoc::Section::name($section), url=>"index-$section.html"} ];
     $page_data{content_tt}  = 'page.tt';
     $page_data{pdf_link}    = "$page_link.pdf";
     $page_data{pod_html}    = Perldoc::Page::Convert::html($page);
     $page_data{pod_html}    =~ s!<(pre class="verbatim")>(.+?)<(/pre)>!autolink($1,$2,$3,$page_data{path})!sge if ($page eq 'perl');
     $page_data{page_index}  = Perldoc::Page::Convert::index($page);
 
-    my $filename  = catfile($Perldoc::Config::option{output_path},$page_data{pageaddress});    
+    my $filename  = catfile($Perldoc::Config::option{output_path},$page_data{pageaddress});
     check_filepath($filename);
-    
+
     $template->process('default.tt',{%Perldoc::Config::option, %page_data},$filename) || die "Failed processing $page\n".$template->error;
-  }  
+  }
 }
 
 
@@ -201,21 +200,20 @@ foreach my $module_index ('A'..'Z') {
   $page_data{path}        = '../' x $page_data{pagedepth};
   $page_data{pagename}    = qq{Core modules ($module_index)};
   $page_data{pageaddress} = "index-modules-$module_index.html";
-  $page_data{breadcrumbs} = [ ];
   $page_data{content_tt}  = 'module_index.tt';
   $page_data{module_az}   = \@module_az_links;
-  
+
   foreach my $module (grep {/^$module_index/ && exists($Perldoc::Page::CoreList{$_})} sort {uc $a cmp uc $b} Perldoc::Page::list()) {
     (my $module_link = $module) =~ s/::/\//g;
     $module_link .= '.html';
     push @{$page_data{module_links}}, {name=>$module, title=>Perldoc::Page::title($module), url=>$module_link};
   }
-  
+
   my $filename = catfile($Perldoc::Config::option{output_path},$page_data{pageaddress});
   check_filepath($filename);
-  
+
   $template->process('default.tt',{%Perldoc::Config::option, %page_data},$filename) || die $template->error;
-  
+
   foreach my $module (grep {/^$module_index/ && exists($Perldoc::Page::CoreList{$_})} Perldoc::Page::list()) {
     my %module_data;
     (my $module_link = $module) =~ s/::/\//g;
@@ -224,17 +222,15 @@ foreach my $module_index ('A'..'Z') {
     $module_data{pagename}    = $module;
     $module_data{pagedepth}   = 0 + $module =~ s/::/::/g;
     $module_data{path}        = '../' x $module_data{pagedepth};
-    $module_data{breadcrumbs} = [ 
-                                  {name=>"Core modules ($module_index)", url=>"index-modules-$module_index.html"} ];
     $module_data{content_tt}  = 'page.tt';
     $module_data{pdf_link}    = "$module_link.pdf";
     $module_data{module_az}   = \@module_az_links;
     $module_data{pod_html}    = Perldoc::Page::Convert::html($module);
     $module_data{page_index}  = Perldoc::Page::Convert::index($module);
-                                
+
     my $filename = catfile($Perldoc::Config::option{output_path},$module_data{pageaddress});
     check_filepath($filename);
-    
+
     $template->process('default.tt',{%Perldoc::Config::option, %module_data},$filename) || die "Failed processing $module\n".$template->error;
   }
 }
@@ -267,7 +263,6 @@ $function_data{path}        = '../' x $function_data{pagedepth};
 
 $function_data{pageaddress} = 'index-functions.html';
 $function_data{pagename}    = 'Perl functions A-Z';
-$function_data{breadcrumbs} = [ {name=>'Language reference', url=>'index-language.html'} ];
 $function_data{content_tt}  = 'function_index.tt';
 $function_data{module_az}   = \@module_az_links;
 
@@ -281,7 +276,7 @@ foreach my $letter ('A'..'Z') {
       my $description = Perldoc::Function::description($function);
       push @functions,{name=>$function, url=>$url, description=>$description};
     }
-  } 
+  }
   push @{$function_data{function_az}}, {letter=>$letter, link=>$link, functions=>\@functions};
 }
 
@@ -324,7 +319,7 @@ $function_data{pagename}    = 'perlfunc';
 $function_data{content_tt}  = 'function_page.tt';
 $function_data{pdf_link}    = "perlfunc.pdf";
 $function_data{pod_html}    = Perldoc::Page::Convert::html('perlfunc');
-    
+
 $filename = catfile($Perldoc::Config::option{output_path},$function_data{pageaddress});
 check_filepath($filename);
 
@@ -346,17 +341,15 @@ foreach my $function (Perldoc::Function::list()) {
   $function =~ s/[^\w-].*//i;
   warn ("No Pod for function '$function'\n") unless ($function_pod);
   chomp $function_pod;
-  
+
   $function_data{pageaddress} = "functions/$function.html";
   $function_data{pagename}    = $function;
-  $function_data{breadcrumbs} = [ {name=>'Language reference', url=>'index-language.html'},
-                                  {name=>'Functions', url=>'index-functions.html'} ];
   $function_data{pod_html}    = Perldoc::Convert::html::convert('function::',$function_pod);
   $function_data{pod_html} =~ s!(<a href=")#(\w+)(">)!Perldoc::Function::exists($2) ? "$1../functions/$2.html$3" : "$1#$2$3"!ge;
 
   $filename  = catfile($Perldoc::Config::option{output_path},$function_data{pageaddress});
   check_filepath($filename);
-  
+
   $function_template->process('default.tt',{%Perldoc::Config::option, %function_data},$filename) || die "Failed processing perlfunc\n".$function_template->error;
 }
 
@@ -393,4 +386,3 @@ sub optionspec {
   }
   return @getopt_list;
 }
-

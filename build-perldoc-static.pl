@@ -27,7 +27,7 @@ my %specifiers = (
   'perl'        => '=s',
   'download'    => '!',
   'pdf'         => '!',
-);                  
+);
 my %options;
 GetOptions( \%options, optionspec(%specifiers) );
 
@@ -63,12 +63,12 @@ if ($options{perl}) {
   my $perl_inc     = `$options{perl} -e '$inc_cmd'`;
   my $bin_cmd      = 'use Config; print $Config{bin}';
   my $perl_bin     = `$options{perl} -e '$bin_cmd'`;
-  
+
   $Perldoc::Config::option{perl_version}  = $perl_version;
   $Perldoc::Config::option{perl5_version} = substr($perl_version,2);
   $Perldoc::Config::option{inc}           = [split /\n/,$perl_inc];
   $Perldoc::Config::option{bin}           = $perl_bin;
-  
+
   #warn Dumper(\%Perldoc::Config::option);
 }
 
@@ -106,7 +106,6 @@ my $static_path = catdir($Perldoc::Config::option{output_path},'static');
 mkpath($static_path) unless -d $static_path;
 
 cp('-r', "$Bin/static/*",     $static_path);
-cp('-r', "$Bin/javascript/*", $static_path);
 
 
 #--Process static html files with template--------------------------------
@@ -116,11 +115,9 @@ foreach my $module_index ('A'..'Z') {
   my $link;
   if (grep {/^$module_index/ && exists($Perldoc::Page::CoreList{$_})} Perldoc::Page::list()) {
     $link = "index-modules-$module_index.html";
-  } 
+  }
   push @module_az_links, {letter=>$module_index, link=>$link};
 }
-
-#my $templatefile = "$Bin/templates/html.template";
 
 my $process = create_template_function(
   #templatefile => $templatefile,
@@ -146,36 +143,28 @@ sub create_template_function {
       my $template = Template->new(INCLUDE_PATH => TT_INCLUDE_PATH,
                                    ABSOLUTE     => 1);
       my $depth    = () = m/\//g;
-      
+
       my %titles = (
         index       => "Perl programming documentation",
         search      => 'Search results',
-        preferences => 'Preferences',
       );
-      
-      my %breadcrumbs = (
-        index       => 'Home',
-        search      => '<a href="index.html">Home</a> &gt; Search results',
-        preferences => '<a href="index.html">Home</a> &gt; Preferences',
-      );
-      
+
       my %variables          = %{$args{variables}};
       $variables{path}       = '../' x ($depth - 1);
       $variables{pagedepth}  = $depth - 1;
       $variables{pagename}   = $titles{$page} || $page;
-      $variables{breadcrumb} = $breadcrumbs{$page} || $page;
       $variables{content_tt} = $File::Find::name;
       #$variables{content}  = fill_in_string($content,hash => {%Perldoc::Config::option, %variables});
-      
+
       #my $html = $template->fill_in(hash => {%Perldoc::Config::option, %variables});
-      
+
       my $output_filename = catfile($Perldoc::Config::option{output_path},$_);
       #if (open OUT,'>',$output_filename) {
       #  print OUT $html;
       #}
       warn "Writing $output_filename";
       $template->process('default.tt',{%Perldoc::Config::option, %variables},$output_filename) || die "Failed processing $page\n".$template->error;
-    #}   
+    #}
   }
 }
 

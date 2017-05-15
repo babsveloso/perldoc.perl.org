@@ -9,7 +9,7 @@ less = {
     },
     style: {
       files: {
-        'public/css/main.min.css': 'assets/less/main.less'
+        'static/css/main.min.css': 'assets/less/main.less'
       }
     },
   };

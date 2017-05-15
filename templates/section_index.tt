@@ -1,9 +1,21 @@
-<h1>[% pagename %]</h1>
-<ul>
-  [% FOREACH page IN section_pages %]
-    <li><a href="[% page.link %]">[% page.name %]</a>
-    [% IF page.title %]
-      - [% page.title %]
-    [% END %]
-  [% END %]
-</ul>
+<div class="container-fluid container-internal">
+  <div class="row">
+    <div class="col-sm-4 col-md-3 sidebar">
+      [% INCLUDE default_sidebar.tt %]
+    </div>
+    <div class="col-sm-8 content">
+      <div class="content-container">
+        <a href="#" class="btn btn-block btn-success btn-sidebar visible-xs js-show-sidebar">« View menu</a>
+        <h2 class="alternate">[% pagename %]</h2>
+          <ul>
+          [% FOREACH page IN section_pages %]
+            <li><a href="[% page.link %]">[% page.name %]</a>
+            [% IF page.title %]
+              - [% page.title %]
+            [% END %]
+          [% END %]
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

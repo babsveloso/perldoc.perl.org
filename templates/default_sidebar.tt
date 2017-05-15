@@ -1,0 +1,29 @@
+<ul class="list-unstyled">
+  <li><h4>Manual</h4></li>
+  <li><a href="[% path %]index-overview.html" class="links">Overview</a></li>
+  <li><a href="[% path %]index-tutorials.html" class="links">Tutorials</a></li>
+  <li><a href="[% path %]index-faq.html" class="links">FAQs</a></li>
+  <li><a href="[% path %]index-history.html" class="links">Changes</a></li>
+
+  <li><h4>Reference</h4></li>
+  <li><a href="[% path %]index-language.html" class="links">Language</a></li>
+  <li><a href="[% path %]index-functions.html" class="links">Functions</a>
+    <ul>
+      <li><a href="[% path %]index-functions.html">Perl functions A-Z</a></li>
+      <li><a href="[% path %]index-functions-by-cat.html">Perl functions by category</a></li>
+      <li><a href="[% path %]perlfunc.html">The 'perlfunc' manpage</a></li>
+    </ul>
+  </li>
+  <li><a href="[% path %]perlop.html" class="links">Operators</a></li>
+  <li><a href="[% path %]perlvar.html" class="links">Variables</a></li>
+
+  <li><h4>Modules</h4></li>
+  <li><a href="[% path %]index-modules-A.html" class="links">Modules</a></li>
+  <li><a href="[% path %]index-pragmas.html" class="links">Pragmas</a></li>
+  <li><a href="[% path %]index-utilities.html" class="links">Utilities</a></li>
+
+  <li><h4>Misc</h4></li>
+  <li><a href="[% path %]index-licence.html" class="links">License</a></li>
+  <li><a href="[% path %]index-internals.html" class="links">Internals</a></li>
+  <li><a href="[% path %]index-platforms.html" class="links">Platforms</a></li>
+</ul>
