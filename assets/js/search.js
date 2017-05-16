@@ -104,8 +104,7 @@ var perldocSearch = {
         return name + ".html";
       }
     );
-
-    perldocSearch.displayResults('pod_search_results',sortedResults);
+    perldocSearch.displayResults('#pod_search_results',sortedResults);
   },
 
 
@@ -124,7 +123,7 @@ var perldocSearch = {
       "_"
     );
 
-    perldocSearch.displayResults('function_search_results',sortedResults);
+    perldocSearch.displayResults('#function_search_results',sortedResults);
   },
 
 
@@ -142,7 +141,7 @@ var perldocSearch = {
       }
     );
 
-    perldocSearch.displayResults('module_search_results',sortedResults);
+    perldocSearch.displayResults('#module_search_results',sortedResults);
   },
 
 
@@ -190,7 +189,7 @@ var perldocSearch = {
       });
     });
 
-    perldocSearch.displayResults('faq_search_results',sortedResults);
+    perldocSearch.displayResults('#faq_search_results',sortedResults);
   },
 
 
@@ -289,9 +288,9 @@ var perldocSearch = {
         }
       });
       resultsHTML += "</ul>";
-      $(elementID).innerHTML = resultsHTML;
+      $(elementID).html(resultsHTML);
     } else {
-      $(elementID).innerHTML = "No matches found";
+      $(elementID).html("No matches found");
     }
   },
 
@@ -346,10 +345,10 @@ var perldocSearch = {
             }
           }
           if (this.request) {
+            this.request.open('GET', filename, false);
             if (this.request.overrideMimeType) {
               this.request.overrideMimeType("text/javascript");
             }
-            this.request.open('GET', filename, false);
             this.request.send(null);
             if (this.request.responseText) {
               this.globalEval(this.request.responseText);

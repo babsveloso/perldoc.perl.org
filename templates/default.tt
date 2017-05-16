@@ -12,7 +12,7 @@
 
 [% is_internal = (pagename != "Perl programming documentation" && pagename != 'Search results') %]
 
-<body [% IF is_internal %]class="internal"[% END %]>
+<body onLoad="perldoc.startup();" onPageShow="if (event.persisted) perldoc.startup();" [% IF is_internal %]class="internal"[% END %]>
   [% INCLUDE navigation.tt %]
 
   [% INCLUDE $content_tt %]

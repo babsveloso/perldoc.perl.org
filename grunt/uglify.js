@@ -15,8 +15,8 @@ uglify = {
     src: [
       'assets/js/libs/jquery-1.12.3.min.js',
       'assets/js/libs/bootstrap.min.js',
-      'assets/js/mootools-1.2.3-core.js',
-      'assets/js/mootools-1.2.3.1-more.js',
+      'assets/js/libs/MooTools-More-1.6.0-compressed.js',
+      'assets/js/perldoc.js',
       'assets/js/search.js',
       'assets/js/libs/highlight.pack.js',
       'assets/js/main.js',
